@@ -1,7 +1,5 @@
 #+TITLE: link-pwd : A quick link handlink tool
 
-
-
 * SINOPSIS
 
   #+BEGIN_SRC sh
@@ -9,7 +7,6 @@
   #+END_SRC
 
 * DESCRIPTION
-
 
 Creates links as described in a file called *Linkfile* with save and restore
 capabilities.
@@ -38,8 +35,7 @@ files that are present.
 
 ** Link
 
-Save /target/ as *$PWD/target/.restore* or *$PWD/target.delete* depending on if
-/target/ existed or not.
+Save /target/ as *$PWD/target/.restore* if /target/ exists.
 
 The script *will refuse to do anything whatsoever with anything that is not a
 link*. If any of the /target/ files are something else than links we're not
@@ -48,7 +44,7 @@ sure.
 
 The *saved state can be that the file doesn't exist.*  If /target/ does not
 exist and /link-pwd/ creates it, it will delete it on /restore/.  This also
-implies that */my_file/* does not need to exist.*
+implies that */my_file/* does not need to exist.
 
 ** Unlink
 
