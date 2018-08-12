@@ -111,18 +111,19 @@ you call this tool because there are less chances of things going wrong.
 Files can have groups of links allowing to link or unlink only certain files.
 
 #+BEGIN_SRC 
+# target                    my_file
 [git]
-  $HOME/.gitconfig gitconfig
-  $HOME/.gitignore.global gitignore.global
+  $HOME/.gitconfig          gitconfig
+  $HOME/.gitignore.global   gitignore.global
 [spacemacs]
-  $HOME/.spacemacs spacemacs
-  $HOME/.spacemacs.d spacemacs.d
-  $HOME/.emacs.d/private emacs.d/private
+  $HOME/.spacemacs          spacemacs
+  $HOME/.spacemacs.d        spacemacs.d
+  $HOME/.emacs.d/private    emacs.d/private
 [tmux]
-  $HOME/.tmux.conf tmux.conf
+  $HOME/.tmux.conf          tmux.conf
 [zhs]
-  $HOME/.zprofile zprofile
-  $HOME/.zshrc zshrc
-  $HOME/.zshenv zshenv
-  $HOME/.zsh_custom zsh_custom
+  $HOME/.zprofile           zprofile
+  $HOME/.zshrc              zshrc
+  $HOME/.zshenv             zshenv
+  $HOME/.zsh_custom         zsh_custom
 #+END_SRC
