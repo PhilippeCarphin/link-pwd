@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 cmd=$(basename $0)
-# linkfile=(" $HOME/.local/man/man1/link-pwd.1   man/man1/man_link-pwd.man" \
+# link_array=(" $HOME/.local/man/man1/link-pwd.1   man/man1/man_link-pwd.man" \
 # "$HOME/.local/man/man1/link-pwd.1   man/man1/man_link-pwd.man")
 ################################################################################
 # Save is either saving a copy of the link or remembering that there was nothing
@@ -348,10 +348,10 @@ if [ -e $Linkfile ] ; then
         ! [ -z $action ] && $action $the_target $the_my_file
 
     done < $link_file
-elif ! [ -z "$linkfile" ] ; then
+elif ! [ -z "$link_array" ] ; then
     exit 0
     if [[ $this_dir == $PWD ]] ; then
-        for l in "${linkfile[@]}" ; do
+        for l in "${link_array[@]}" ; do
             the_target=$(echo $l | tr -s ' ' | cut -d ' ' -f 1)
             the_my_file=$this_dir/$(echo $l | tr -s ' ' | cut -d ' ' -f 2)
             ! [ -z $action ] && $action $the_target $the_my_file
