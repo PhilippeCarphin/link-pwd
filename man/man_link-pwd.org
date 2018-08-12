@@ -14,6 +14,7 @@ capabilities.
 The *Linkfile* has two columns :
 
 #+BEGIN_SRC sh
+  # target            my_file
   $HOME/.zprofile     zprofile
   $HOME/.zshrc        zshrc
   $HOME/.zshenv       zshenv
@@ -22,7 +23,9 @@ The *Linkfile* has two columns :
 
 /target/ and /my_file/. The script will save
 /target/ as a /restore_file/ in $PWD and replace /target/ with a link pointing
-to /my_file/.
+to /my_file/.  I've tried to find the best words and this is what I got.  So
+just remember that /target/ means target of the replacement by a link to
+/my_file/.  It *does not* mean target in the sense of "link pointing to".
 
 #+BEGIN_SRC sh
   link-pwd <command> [-jp|--just-print] [-g|--group]
@@ -80,7 +83,7 @@ Or it can be for something temporary like trying out an emacs configuration.  I
 have this for a side config that I use to experiment
 
 #+BEGIN_SRC sh
-# source               my_file
+# target               my_file
 $HOME/.emacs           emacs
 $HOME/.emacs.d         emacs.d
 $HOME/.spacemacs       spacemacs
