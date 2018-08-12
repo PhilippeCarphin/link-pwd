@@ -38,7 +38,7 @@ files that are present.
 
 ** Link
 
-Save /target/ as /$PWD/target/.restore/ or /$PWD/target.delete/ depending on if
+Save /target/ as *$PWD/target/.restore* or *$PWD/target.delete* depending on if
 /target/ existed or not.
 
 The script *will refuse to do anything whatsoever with anything that is not a
