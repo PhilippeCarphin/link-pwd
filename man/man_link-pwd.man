@@ -1,0 +1,163 @@
+.TH "link-pwd : A quick link handlink tool" "1" 
+
+.SH "SINOPSIS"
+.RS
+.nf
+\fClink-pwd <command> [-jp|--just-print] [-g|--group]
+\fP
+.fi
+.RE
+
+.SH "DESCRIPTION"
+.PP
+Creates links as described in a file called \fBLinkfile\fP with save and restore
+capabilities.
+
+.PP
+The \fBLinkfile\fP has two columns :
+
+.RS
+.nf
+\fC# target            my_file
+$HOME/.zprofile     zprofile
+$HOME/.zshrc        zshrc
+$HOME/.zshenv       zshenv
+$HOME/.zsh_custom   zsh_custom
+\fP
+.fi
+.RE
+
+.PP
+\fItarget\fP and \fImy\d\s-2file\s+2\u\fP. The script will save
+\fItarget\fP as a \fIrestore\d\s-2file\s+2\u\fP in $PWD and replace \fItarget\fP with a link pointing
+to \fImy\d\s-2file\s+2\u\fP.  I've tried to find the best words and this is what I got.  So
+just remember that \fItarget\fP means target of the replacement by a link to
+\fImy\d\s-2file\s+2\u\fP.  It \fBdoes not\fP mean target in the sense of "link pointing to".
+
+.RS
+.nf
+\fClink-pwd <command> [-jp|--just-print] [-g|--group]
+\fP
+.fi
+.RE
+
+.SS "Status"
+.PP
+\fIstatus\fP will only show the states of \fItarget\fP, \fImy\d\s-2file\s+2\u\fP and any \fIrestore\fP
+files that are present.
+
+.SS "Link"
+.PP
+Save \fItarget\fP as \fB$PWD/target/.restore\fP if \fItarget\fP exists.
+
+.PP
+The script \fBwill refuse to do anything whatsoever with anything that is not a
+link\fP. If any of the \fItarget\fP files are something else than links we're not
+touching them. If they are links they will be saved and you can do status to be
+sure.
+
+.PP
+The \fBsaved state can be that the file doesn't exist.\fP  If \fItarget\fP does not
+exist and \fIlink-pwd\fP creates it, it will delete it on \fIrestore\fP.  This also
+implies that \fB\fImy\d\s-2file\s+2\u\fP\fP does not need to exist.
+
+.SS "Unlink"
+.PP
+Save \fItarget\fP links as \fI$PWD/target\fP.restore/ 
+.SS "forget"
+.PP
+The intended use is to put something somewhere and do just-print
+and check that everything's ok
+
+.RS
+.nf
+\fClink-pwd link --just-print
+\fP
+.fi
+.RE
+
+.PP
+Then link
+
+.RS
+.nf
+\fClink-pwd link
+\fP
+.fi
+.RE
+
+.PP
+Make sure that everything is OK:
+
+.RS
+.nf
+\fClink-pwd status
+\fP
+.fi
+.RE
+
+.PP
+And clear up the restore files.
+
+.RS
+.nf
+\fClink-pwd forget
+\fP
+.fi
+.RE
+
+.PP
+Or it can be for something temporary like trying out an emacs configuration.  I
+have this for a side config that I use to experiment
+
+.RS
+.nf
+\fC# target               my_file
+$HOME/.emacs           emacs
+$HOME/.emacs.d         emacs.d
+$HOME/.spacemacs       spacemacs
+$HOME/.spacemacs.d     spacemacs.d
+\fP
+.fi
+.RE
+
+.PP
+My regular config has \fI.emacs.d\fP, \fI.spacemacs.d\fP and \fI.spacemacs\fP.  And this
+side config has just an \fIemacs.d\fP.  The other ones dont exist.  And when I do
+link, the script will delete \fI$HOME/.spacemacs\fP and so on so that the files in
+the left column mimick the state of existence or non-existence of the files in
+the left column.
+
+.SH "OPTIONS"
+.SS "-jp, --just-print"
+.PP
+Show only output of what the command would do.
+
+.SS "-f, --file"
+.PP
+Use other file than Linkfile.  I've made it so that it has to be in $PWD while
+you call this tool because there are less chances of things going wrong.
+
+.SS "-g, --group"
+.PP
+Files can have groups of links allowing to link or unlink only certain files.
+
+.RS
+.nf
+\fC[git]
+  $HOME/.gitconfig gitconfig
+  $HOME/.gitignore.global gitignore.global
+[spacemacs]
+  $HOME/.spacemacs spacemacs
+  $HOME/.spacemacs.d spacemacs.d
+  $HOME/.emacs.d/private emacs.d/private
+[tmux]
+  $HOME/.tmux.conf tmux.conf
+[zhs]
+  $HOME/.zprofile zprofile
+  $HOME/.zshrc zshrc
+  $HOME/.zshenv zshenv
+  $HOME/.zsh_custom zsh_custom
+\fP
+.fi
+.RE
