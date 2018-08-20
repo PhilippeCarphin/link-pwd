@@ -281,7 +281,7 @@ do
             action=status
             ;;
         *)
-            echo "Unknown subcommand $subcommand"
+            echo "Unknown argument $option"
             ;;
     esac
     shift
@@ -327,6 +327,7 @@ fi
 # - group name : change group
 # - not the right group
 ################################################################################
+found_file_from_group="false"
 if [ -e $Linkfile ] ; then
     while read column_1 column_2 extra ; do
 
@@ -343,11 +344,17 @@ if [ -e $Linkfile ] ; then
             continue
         fi
 
+        found_file_from_group="true"
         the_target=$(eval echo $column_1)
         the_my_file=$this_dir/$(eval echo $column_2)
         ! [ -z $action ] && $action $the_target $the_my_file
 
     done < $link_file
+
+    if ! $found_file_from_group ; then
+        echo "No files found for group $group_to_link"
+    fi
+
 elif ! [ -z "$link_array" ] ; then
     exit 0
     if [[ $this_dir == $PWD ]] ; then
