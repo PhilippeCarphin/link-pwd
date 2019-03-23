@@ -329,11 +329,13 @@ fi
 ################################################################################
 found_file_from_group="false"
 if [ -e $Linkfile ] ; then
+    lines_read=false
     while read column_1 column_2 extra ; do
 
         if [[ "$column_1" = \#* ]] ; then
             continue
         fi
+        lines_read=true
 
         if is_group $column_1 ; then
             current_group=$(get_group $column_1)
@@ -353,6 +355,10 @@ if [ -e $Linkfile ] ; then
 
     if ! $found_file_from_group ; then
         echo "No files found for group $group_to_link"
+    fi
+
+    if [[ $lines_read == false ]] ; then
+        echo "ERROR No lines read"
     fi
 
 elif ! [ -z "$link_array" ] ; then
