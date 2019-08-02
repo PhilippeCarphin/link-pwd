@@ -15,7 +15,7 @@ save_target(){
         if $just_print ; then
            return
         fi
-        mv $target $(basename $target).restore
+        mv $target .$(basename $target).restore
     fi
 }
 
