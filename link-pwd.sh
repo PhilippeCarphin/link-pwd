@@ -10,7 +10,7 @@ cmd=$(basename $0)
 save_target(){
     local target=$1
 
-    if [ -e $target ] ; then
+    if [ -e $target ] || [ -L $target ] ; then
         echo "$(tput setaf 2)SAVING $target as $(basename $target).restore$(tput sgr 0)"
         if $just_print ; then
            return
