@@ -79,6 +79,8 @@ maybe_link(){
             return
         fi
         ln -s $target $link_name
+    else
+        echo "$(tput setaf 6)Target $target of link $link_name does not exist"
     fi
 }
 
